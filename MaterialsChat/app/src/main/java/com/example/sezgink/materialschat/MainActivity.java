@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements SocialFragment.On
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNav);
         bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener); // Assign listener
 
-        fragmentManager = getSupportFragmentManager();
+        fragmentManager = getSupportFragmentManager(); // Create fragment manager to get instant fragment
         fragmentManager.beginTransaction().add(R.id.frame_container,new MainActivityFragment(),"frameContainer").commit(); //Assign tag to container
         //loadFragment(new MainActivityFragment());
 
@@ -74,17 +74,17 @@ public class MainActivity extends AppCompatActivity implements SocialFragment.On
                     colToolbar.setTitle("Main side");
                     defineFABs();
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                        fab.setImageDrawable(getDrawable(android.R.drawable.ic_menu_add));
+                        fab.setImageDrawable(getDrawable(android.R.drawable.ic_menu_add)); // If version greater than fragment assign different icon
                     }
 
                     fragment = new MainActivityFragment();
-                    loadFragment(fragment);
+                    loadFragment(fragment); //Call MainActivityFragment
                     return true;
                 case R.id.item2:
                     //toolbar.setTitle("My Gifts");
                     colToolbar.setTitle("Social Side"); // Change title
 
-                    defineFAB0();
+                    defineFAB0(); //Change function of fab
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                         fab.setImageDrawable(getDrawable(android.R.drawable.ic_delete));
                     }
@@ -113,16 +113,16 @@ public class MainActivity extends AppCompatActivity implements SocialFragment.On
         }
     };
 
+    //Load fragment in paramter to container
     private void loadFragment(android.support.v4.app.Fragment fragment) {
         // load fragment
-        //FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
 
-        android.support.transition.Fade exitFade = new android.support.transition.Fade();
-        exitFade.setDuration(FADE_DEFAULT_TIME);
+        android.support.transition.Fade exitFade = new android.support.transition.Fade(); // Create new support fade
+        exitFade.setDuration(FADE_DEFAULT_TIME); //Assign fade time
 
         //android.support.v4.app.Fragment previousFragment = fragmentManager.findFragmentById(R.id.frame_container);
-        android.support.v4.app.Fragment previousFragment = fragmentManager.findFragmentByTag("frameContainer");
+        android.support.v4.app.Fragment previousFragment = fragmentManager.findFragmentByTag("frameContainer"); // Get instant fragment
 
         //previousFragment.setExitTransition(exitFade);
 
@@ -131,11 +131,13 @@ public class MainActivity extends AppCompatActivity implements SocialFragment.On
         //fragment.setEnterTransition(enterFade);
 
 
-            previousFragment.setExitTransition(exitFade);
-            fragment.setEnterTransition(enterFade);
+        //Assign transitions
+        previousFragment.setExitTransition(exitFade);
+        fragment.setEnterTransition(enterFade);
 
 
 
+        //Replace new fragment
         transaction.replace(R.id.frame_container, fragment);
 
         transaction.addToBackStack(null);
@@ -143,6 +145,7 @@ public class MainActivity extends AppCompatActivity implements SocialFragment.On
     }
 
     void defineFAB0() {
+        //Close FAB menu and change function of button
         closeFABMenu();
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -163,6 +166,7 @@ public class MainActivity extends AppCompatActivity implements SocialFragment.On
         });
     }
     void defineFABs() {
+        //Define all buttons and assign functions
         fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -214,12 +218,14 @@ public class MainActivity extends AppCompatActivity implements SocialFragment.On
 
 
     }
+    //Show FAB menu with animate
     void showFABMenu(){
         isFABOpen=true;
         fab2.animate().translationY(-getResources().getDimension(R.dimen.standard_55));
         fab3.animate().translationY(-getResources().getDimension(R.dimen.standard_105));
 
     }
+    //Hide FAB menu with animation
     void closeFABMenu(){
         isFABOpen=false;
         fab2.animate().translationY(0);

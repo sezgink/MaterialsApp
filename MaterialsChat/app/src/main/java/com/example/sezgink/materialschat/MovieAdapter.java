@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+//Adapter class for test with Recycler View
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder> {
 
 

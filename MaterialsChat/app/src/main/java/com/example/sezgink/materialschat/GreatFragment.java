@@ -26,6 +26,7 @@ import java.util.List;
  * Use the {@link GreatFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
+//Fragment for test collapsing toolbar with recylcer view
 public class GreatFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
