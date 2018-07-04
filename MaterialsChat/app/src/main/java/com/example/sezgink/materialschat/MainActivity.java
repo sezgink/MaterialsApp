@@ -46,20 +46,22 @@ public class MainActivity extends AppCompatActivity implements SocialFragment.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //colToolbar = (CollapsingToolbarLayout) findViewById(R.id.colToolbar);
+        colToolbar = (CollapsingToolbarLayout) findViewById(R.id.colToolbar);
         //setSupportActionBar(toolbar);
         setSupportActionBar(toolbar);
 
-        defineFABs();
+        defineFABs(); // Define and assign views and functions to FABs
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNav);
-        bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener); // Assign listener
 
         fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().add(R.id.frame_container,new MainActivityFragment(),"frameContainer").commit();
+        fragmentManager.beginTransaction().add(R.id.frame_container,new MainActivityFragment(),"frameContainer").commit(); //Assign tag to container
         //loadFragment(new MainActivityFragment());
 
     }
+
+    //Create listener
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -67,9 +69,9 @@ public class MainActivity extends AppCompatActivity implements SocialFragment.On
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             android.support.v4.app.Fragment fragment;
             switch (item.getItemId()) {
-                case R.id.item1:
-                    toolbar.setTitle("Shop");
-                   // colToolbar.setTitle("Main side");
+                case R.id.item1: //If item 1 selected
+                    //toolbar.setTitle("Shop");
+                    colToolbar.setTitle("Main side");
                     defineFABs();
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                         fab.setImageDrawable(getDrawable(android.R.drawable.ic_menu_add));
@@ -79,8 +81,8 @@ public class MainActivity extends AppCompatActivity implements SocialFragment.On
                     loadFragment(fragment);
                     return true;
                 case R.id.item2:
-                    toolbar.setTitle("My Gifts");
-                    //colToolbar.setTitle("Social Side");
+                    //toolbar.setTitle("My Gifts");
+                    colToolbar.setTitle("Social Side"); // Change title
 
                     defineFAB0();
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -128,11 +130,11 @@ public class MainActivity extends AppCompatActivity implements SocialFragment.On
         enterFade.setDuration(FADE_DEFAULT_TIME);
         //fragment.setEnterTransition(enterFade);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+
             previousFragment.setExitTransition(exitFade);
             fragment.setEnterTransition(enterFade);
 
-        }
+
 
         transaction.replace(R.id.frame_container, fragment);
 
@@ -216,6 +218,7 @@ public class MainActivity extends AppCompatActivity implements SocialFragment.On
         isFABOpen=true;
         fab2.animate().translationY(-getResources().getDimension(R.dimen.standard_55));
         fab3.animate().translationY(-getResources().getDimension(R.dimen.standard_105));
+
     }
     void closeFABMenu(){
         isFABOpen=false;
